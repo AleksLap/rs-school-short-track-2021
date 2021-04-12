@@ -21,8 +21,38 @@
  *  [1, 1, 1]
  * ]
  */
-function minesweeper(/* matrix */) {
-  throw new Error('Not implemented');
+function minesweeper(matrix) {
+  const result = [];
+
+  matrix.forEach((line, lineInd) => {
+    const lineArr = [];
+
+    line.forEach((el, elInd) => {
+      let count = 0;
+
+      if (matrix[lineInd][elInd + 1] === true) count++;
+      if (matrix[lineInd][elInd - 1] === true) count++;
+      if (lineInd === 0) {
+        if (matrix[lineInd + 1][elInd] === true) count++;
+        if (matrix[lineInd + 1][elInd + 1] === true) count++;
+        if (matrix[lineInd + 1][elInd - 1] === true) count++;
+      } else if (lineInd === matrix.length - 1) {
+        if (matrix[lineInd - 1][elInd] === true) count++;
+        if (matrix[lineInd - 1][elInd + 1] === true) count++;
+        if (matrix[lineInd - 1][elInd - 1] === true) count++;
+      } else if (lineInd !== 0 && lineInd !== matrix.length - 1) {
+        if (matrix[lineInd + 1][elInd] === true) count++;
+        if (matrix[lineInd + 1][elInd + 1] === true) count++;
+        if (matrix[lineInd + 1][elInd - 1] === true) count++;
+        if (matrix[lineInd - 1][elInd] === true) count++;
+        if (matrix[lineInd - 1][elInd + 1] === true) count++;
+        if (matrix[lineInd - 1][elInd - 1] === true) count++;
+      }
+      lineArr.push(count);
+    });
+    result.push(lineArr);
+  });
+  return result;
 }
 
 module.exports = minesweeper;
